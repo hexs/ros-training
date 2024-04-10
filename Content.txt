@@ -1,0 +1,21 @@
+เวลา	เนื้อหา
+Day1	
+09:00-09:30	Introduction to iron-X
+09:30-10.30	VMware + Ubuntu
+10:30-10:45	Coffe break 15 min
+10:45-11:15	Installation of ROS2
+11:15-12:00	iron-X's remote with ssh and NoMachine
+12:00-13:00	launch time 1 hours
+13:00-14:30	iron-X's bringup with 2D camera
+14:30-14:45	Coffe break 15 min
+14:45-16:00	Cartographer SLAM
+	
+Day2	
+09:00-10:30	Navigation part 1
+10:30-10:45	Coffe break 15 min
+10:45-12:00	Navigation part 2
+12:00-13:00	launch time 1 hours
+13:00-14:30	iron-X's Image Processing (2D)
+14:30-14:45	Coffe break 15 min
+14:45-15:30	Introduction to TESR Studio
+15:30-16:00	Q&A
