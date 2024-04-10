@@ -1,0 +1,10 @@
+==================== Visual Studio code ================
+
+go to thi link -> https://code.visualstudio.com/download
+
+
+cd ~/Downloads
+ls
+sudo dpkg -i code_1.71.2-1663191218_amd64.deb
+
+===============================================================

@@ -1,0 +1,167 @@
+======================================================
+========== Installation of ROS2 Foxy Fitzroy ==========
+=======================================================
+
+locale
+sudo apt update && sudo apt install locales​
+sudo locale-gen en_US en_US.UTF-8​
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8​
+export LANG=en_US.UTF-8​
+locale
+
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+sudo apt update
+sudo apt upgrade
+
+sudo apt install ros-foxy-desktop python3-argcomplete
+sudo apt install ros-dev-tools
+
+sudo apt install python3-colcon-common-extensions
+sudo apt install python3-pip
+sudo apt install unzip
+sudo apt install python3-rosdep2
+#install net-tools
+sudo apt install net-tools
+#install File transfers and open ssh
+sudo apt-get install openssh-server openssh-client
+#install Gazebo
+sudo apt-get install ros-foxy-gazebo-*
+#install Cartographer
+sudo apt install ros-foxy-cartographer
+sudo apt install ros-foxy-cartographer-ros
+#install Navigation2
+sudo apt install ros-foxy-navigation2
+sudo apt install ros-foxy-nav2-bringup
+#install libg2o(General Graph Optimization) for TEB method
+sudo apt install ros-foxy-libg2o -y
+
+sudo nano .bashrc
+# Scroll down to the buttom line
+source /opt/ros/foxy/setup.bash
+
+# And then, press "Ctrl+O" to save and "Ctrl+X" to exit from nano and source .bashrc using
+source .bashrc
+
+rosversion –d
+==============================================================================================================
+
+========== iron-X’s remote ==========
+ifconfig
+
+ping 192.168.1.19
+
+ssh pi@192.168.1.19
+==============================================================================================================
+
+========== Remote to the iron-X’s desktop using the NoMachine ==========
+cd ~/Downloads
+
+ls
+
+sudo dpkg -i nomachine_7.10.1_1_amd64.deb
+==============================================================================================================
+
+========== ROS2 iron-X’s network setting ==========
+sudo nano ~/.bashrc
+
+source ~/.bashrc
+==============================================================================================================
+
+========== Setup ROS_Domain_ID on iron-X ==========
+ssh pi@<iron-X’s ip-address>
+
+sudo nano ~/.bashrc
+
+source ~/.bashrc
+==============================================================================================================
+
+========== iron-X’s driver ==========
+(On Remote terminal)
+ros2 run ironx_bringup ironx_driver
+
+(On PC/Laptop terminal)
+ros2 topic list
+
+(On PC/Laptop terminal)
+ros2 topic echo /odom
+
+(On PC/Laptop terminal)
+ros2 topic echo /imu
+
+(On PC/Laptop terminal)
+ros2 topic echo /ironx_voltage
+
+(On Remote terminal)
+ros2 run ironx_bringup ironx_driver
+
+(On PC/Laptop terminal)
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+(On Remote terminal)
+ros2 launch ironx_bringup ironx_start.launch.py
+
+(On PC/Laptop terminal)
+ros2 topic list
+
+(On PC/Laptop terminal)
+rviz2
+==============================================================================================================
+
+========== Download the iron-X’s source file to PC/Laptop ==========
+cd ros2_ws/
+colcon build --symlink-install
+. install/setup.bash
+==============================================================================================================
+
+==========iron-X’s 2D camera streaming==========
+(On Remote terminal)
+ros2 launch ironx_bringup ironx_start.launch.py use_cam:=true
+==============================================================================================================
+
+========== Cartographer SLAM ==========
+(On Remote terminal)
+ros2 launch ironx_bringup ironx_start.launch.py
+
+(On PC/Laptop terminal)
+ros2 launch ironx_navigation cartographer.launch.py
+
+(On PC/Laptop terminal)
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+==============================================================================================================
+
+========== Save a map from cartographer SLAM ==========
+(On PC/Laptop terminal)
+ros2 run nav2_map_server map_saver_cli -f ~/ros2_ws/src/ironx_navigation/map/map_test
+==============================================================================================================
+
+========== Navigation ==========
+(On Remote terminal)
+ros2 launch ironx_bringup ironx_start.launch.py
+
+(On PC/Laptop terminal)
+ros2 launch ironx_navigation navigation.launch.py map:=~/ros2_ws/src/ironx_navigation/map/map_test.yaml
+==============================================================================================================
+
+========== iron-X’s move type ==========
+(On PC/Laptop terminal)
+ros2 launch ironx_navigation navigation.launch.py use_omni:=true map:=~/ros2_ws/src/ironx_navigation/map/map_test.yaml
+==============================================================================================================
+
+========== iron-X’s TESR Studio ==========
+(On Remote terminal)
+ros2 launch ironx_bringup ironx_start.launch.py
+
+(On Remote terminal)
+cd TESR\ Studio
+python3 robot_api.py
+
+(On PC/Laptop terminal)
+cd TESR\ Studio
+python3 server_robot_handler.py
+tesr-studio

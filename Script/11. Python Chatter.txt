@@ -1,0 +1,67 @@
+======================= Python Chatter ========================
+
+============== PC site ===================
+sudo pip3 install gdown -y
+mkdir -p ros2_ws/src
+cd ros2_ws/src
+
+================== Create package by yourself ==============
+ros2 pkg create --build-type ament_python python_chatter
+
+#edit package.xml
+<license>TODO: License declaration</license>
+<depend>rclpy</depend>
+<depend>std_msgs</depend>
+
+#edit setup.py following entry_points
+entry_points={
+'console_scripts': [
+'talker = python_chatter.py_talker:main',
+'listener = python_chatter.py_listener:main',
+	],
+},
+
+# save file and exit
+
+
+cd ~/ros2_ws/
+rosdep update
+rosdep install -i --from-path src --rosdistro foxy -y
+colcon build
+echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+=================================================
+
+=================== Short cut :) ===============
+# load and unzip file https://drive.google.com/file/d/1so7VdTCU57MIqLVdN08gHTSelW41EsCl/view?usp=sharing
+cd ~/ros2_ws/src
+gdown 1so7VdTCU57MIqLVdN08gHTSelW41EsCl
+unzip python_chatter.zip
+rm -rf python_chatter.zip
+================================================
+
+cd ~/ros2_ws/src/python_chatter/python_chatter/
+sudo chmod +x *
+
+cd ~/ros2_ws
+colcon build
+
+# open terminal 1
+ros2 run python_chatter talker
+
+# open terminal 2
+ros2 run python_chatter listener
+
+# checking
+ros2 node list
+ros2 topic list
+ros2 service list
+ros2 param list
+
+rqt_graph
+
+==========================================
+
+
+===============================================================

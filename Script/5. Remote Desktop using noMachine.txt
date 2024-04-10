@@ -1,0 +1,17 @@
+==================== No Machine Remote Desktop ================
+go to thi link -> https://downloads.nomachine.com/download/?id=6
+
+
+cd ~/Downloads
+ls
+sudo dpkg -i nomachine_8.0.168_2_amd64.deb
+
+===============================================================
+
+
+==== if you cannot install try this and install it again ======
+lsof /var/lib/dpkg/lock
+sudo rm /var/lib/dpkg/lock
+sudo dpkg --configure -a
+===============================================================
+

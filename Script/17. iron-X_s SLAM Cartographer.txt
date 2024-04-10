@@ -1,0 +1,41 @@
+======================= iron-X's SLAM Cartographer ========================
+==========================================
+# Remote terminal to iron-x robot
+ssh pi@<ironx-X's IP-address>
+
+# now ssh connected with iron-X Robot
+# iron-x terminal 1
+ros2 launch ironx_bringup ironx_start.launch.py
+
+# Terminal on PC site SLAM Cartographer
+# PC terminal 1
+ros2 launch ironx_navigation cartographer.launch.py use_sim_time:=false
+# PC terminal 2
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+# iron-x terminal 2
+ros2 run nav2_map_server map_saver_cli -f ~/ros2_ws/src/ironx_navigation/map/map_test
+
+# PC terminal 3
+rqt_graph
+
+==========================================
+===============================================================
+
+======================= iron-X's Navigation ========================
+==========================================
+# Remote terminal to iron-x robot
+ssh pi@<ironx-X's IP-address>
+
+# now ssh connected with iron-X Robot
+# iron-x terminal 1
+ros2 launch ironx_bringup ironx_start.launch.py
+
+# Terminal on PC site iron-X's Navigation
+# PC terminal 1
+ros2 launch ironx_navigation navigation.launch.py use_sim_time:=false map:=$HOME/ros2_ws/src/ironx_navigation/map/map_test.yaml
+
+# PC terminal 2
+rqt_graph
+==========================================
+===============================================================

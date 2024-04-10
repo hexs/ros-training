@@ -1,0 +1,21 @@
+======================= imu ========================
+
+============== PC site ===================
+# Remote terminal to iron-x robot
+ssh pi@<ironx-X's IP-address>
+
+# now ssh connected with iron-X Robot
+# iron-x terminal
+ros2 launch ironx_bringup robot_state_publisher_imu.launch.py
+
+# Terminal on PC site
+# terminal
+rviz2
+
+#terminal2
+rqt_graph
+
+==========================================
+
+
+===============================================================

@@ -1,0 +1,81 @@
+======================= iron-X simulation on GAZEBO ========================
+
+============== PC site ===================
+# Install Gazebo11
+sudo apt-get install ros-foxy-gazebo-* -y
+# Install Cartographer
+sudo apt install ros-foxy-cartographer -y
+sudo apt install ros-foxy-cartographer-ros -y
+# Install Navigation2
+sudo apt install ros-foxy-navigation2 -y
+sudo apt install ros-foxy-nav2-bringup -y
+# Install libg2o(General Graph Optimization) for TEB method
+sudo apt install ros-foxy-libg2o -y
+
+cd ros2_ws/src
+
+# Download ironx_navigation https://drive.google.com/file/d/1CHf55cJ2axVwCRpKHfVJeSbfTLaXelbr/view?usp=sharing
+gdown 1CHf55cJ2axVwCRpKHfVJeSbfTLaXelbr
+unzip ironx_navigation.zip
+rm -rf ironx_navigation.zip
+
+# Download ironx_navigation https://drive.google.com/file/d/18fhGYWo627u2y8kIgI59rGJzMYR7-0N8/view?usp=sharing
+gdown 18fhGYWo627u2y8kIgI59rGJzMYR7-0N8
+unzip ironx_simulation.zip
+rm -rf ironx_simulation.zip
+
+# Download dependencies https://drive.google.com/file/d/199vdRn3f7WaRjRuC6WehKFRU9ZlfnW9G/view?usp=sharing
+gdown 199vdRn3f7WaRjRuC6WehKFRU9ZlfnW9G
+unzip dependencies.zip
+rm -rf dependencies.zip
+
+
+cd ..
+colcon build --symlink-install
+
+cd
+sudo nano .bashrc
+
+# Scroll down to the buttom line
+export SVGA_VGPU10=0
+export GAZEBO_MODEL_PATH=~/ros2_ws/src/ironx_simulation/ironx_gazebo/models
+
+# Press Ctrl + o for saving and Ctrl + x for exit
+source ~/.bashrc
+
+====================== Simulation and cartographer method (3 Core) =====================
+# Open Terminal1
+ros2 launch ironx_gazebo ironx_3d_camera_world.launch.py
+
+# Open Terminal2
+ros2 run teleop_twist_keyboard teleop_twist_keyboard  # fix speed 0.25 turn 0.25
+
+# Open Terminal3
+ros2 launch ironx_navigation view_cartographer.launch.py use_sim_time:=true
+
+# Open Terminal4
+rqt_graph
+
+# Open Terminal5
+ros2 run nav2_map_server map_saver_cli -f ~/ros2_ws/src/ironx_navigation/map/map
+
+# Close all terminal
+================================================================================
+
+=========================== Similation and Navigation (3 Core) ========================== 
+# Open Terminal1
+ros2 launch ironx_gazebo ironx_3d_camera_world.launch.py
+
+# Open Terminal2
+ros2 launch ironx_navigation view_navigation.launch.py use_sim_time:=true map:=~/ros2_ws/src/ironx_navigation/map/map.yaml
+
+# Open Terminal3
+rqt_graph
+
+# Close all terminal
+================================================================================
+
+==========================================
+
+
+===============================================================

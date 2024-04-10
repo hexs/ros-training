@@ -1,0 +1,21 @@
+======================= ROS2 Line Notify ========================
+==========================================
+
+# PC Site
+
+# load and unzip file https://drive.google.com/file/d/1Aqd-dX18c79z9umiM4byGWXD3dEJQ8jy/view?usp=sharing
+cd ~/ros2_ws/src
+gdown 1Aqd-dX18c79z9umiM4byGWXD3dEJQ8jy
+unzip line_notify.zip
+rm -rf line_notify.zip
+
+colcon build --symlink-install
+
+# Termianl 1
+ros2 run line_notify pub
+
+# Terminal 2
+ros2 run line_notify sub
+
+==========================================
+===============================================================

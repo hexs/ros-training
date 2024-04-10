@@ -1,0 +1,28 @@
+======================= PC&Robot Network setting ========================
+
+============== PC site ===================
+# PC site
+sudo nano ~/.bashrc
+
+# Scroll down to the last line
+export ROS_DOMAIN_ID=99
+
+# Press Ctrl+o for saving and then press Ctrl+x for exit
+source ~/.bashrc
+==========================================
+
+
+============== ironx site ================
+# remote to ironx(ironx must be on the same network with your PC site)
+ssh pi@x.x.x.x # x.x.x.x is the ironx's IP
+
+sudo nano ~/.bashrc
+
+# Scroll down to the last line
+export ROS_DOMAIN_ID=99 # same ID with the PC
+
+# Press Ctrl+o for saving and then press Ctrl+x for exit
+source ~/.bashrc
+========================================== 
+
+===============================================================

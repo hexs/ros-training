@@ -1,0 +1,8 @@
+==================== Installation of Arduino ================
+
+sudo snap install arduino  # version 1.8.19, or
+sudo apt  install arduino  # version 2:1.0.5+dfsg2-4.1
+
+sudo usermod -a -G dialout ironxtesr
+sudo reboot
+===============================================================

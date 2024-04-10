@@ -1,0 +1,21 @@
+======================= iron-X JoyStick_Keyboard ========================
+
+============== PC site ===================
+# Download ironx_driver https://drive.google.com/file/d/1MurwYiOX4c1dmRPRg2_kzHu_Il5qJr4S/view?usp=sharing
+cd ros2_ws/src
+gdown 1MurwYiOX4c1dmRPRg2_kzHu_Il5qJr4S
+unzip basic_ironx_bringup.zip
+rm -rf basic_ironx_bringup.zip
+
+cd ..
+colcon build --symlink-install
+
+# open terminal1(must be run into ironx only)
+ros2 run ironx_bringup ironx_driver
+
+# open terminal2(you can run into PC site)
+ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+==========================================
+
+
+===============================================================

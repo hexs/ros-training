@@ -1,0 +1,25 @@
+==================== Linux Basic Commands ================
+
+pwd # command to terminal to display thepath of the current working directory.
+ls # command to display the list of content in current working directory.
+mkdir your_folder # command tomake a newdirectory folder.
+nano your_file # command use to create or open document file in current directory.
+grep # command use to find and display wording you given through a document.
+echo # command use to display the data in declared content or write content to file.
+cd # command to change current working directory.
+cp filename_copy_path destination path # command to copy file to directory that you're prefer.
+mv filename_move_path destination path # command tomove file to directory that you're prefer.
+rmdir directory_name_path # command to remove the directory including content inside it.
+rm file_name_path # command to removea file from yourworking directory.
+df # command to show the report of system's disk space usage.
+sudo # "SuperUserDO"command line enables you to perform tasks that require administrative or root permission.S
+chmod # command use to give permission to manage the content in working directory.
+tar # command to unzip .tar file.For example, we will download and install Arduino using tar unzip.
+dpgk # a tools for install, build, remove and manage deb file
+git clone # command that help you to download folder from githubHTTPS link address.
+wget # command tools help you to download file.
+unzip # commandtounzip.zip file.
+ifconfig # command use to check own Laptop/PC ipaddress and MAC address too.
+hostname -i # another command use to show ip address
+ping # command use to check the connection within network.
+===============================================================

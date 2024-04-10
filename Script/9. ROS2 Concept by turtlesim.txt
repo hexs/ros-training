@@ -1,0 +1,78 @@
+======================= turtlesim ========================
+# install package
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install ros-foxy-turtlesim
+
+# Check that the package installed.
+ros2 pkg executables turtlesim
+
+# Testing turtlesim
+ros2 run turtlesim turtlesim_node
+
+# Open a new teminal tab or a new terminal for using keyboard control
+ros2 run turtlesim turtle_teleop_key
+
+# Let see node,topic,service,action
+ros2 node list
+ros2 topic list
+ros2 service list
+ros2 action list
+
+# You can use remapping command
+ros2 run turtlesim turtlesim_node --ros-args--remap __node:=my_turtle
+ros2 node list
+ros2 node info /my_turtle
+
+# install rqt
+sudo apt-get update
+sudo apt-get install ~nros-foxy-rqt*
+rqt
+rqt_graph
+
+# use case of ros2 topic
+ros2 topic list
+ros2 topic echo /turtle1/cmd_vel
+ros2 topic info /turtle1/cmd_vel
+ros2 interface show geometry_msgs/msg/Twist
+
+# topic pub base on command line
+ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}"
+
+ros2 topic pub --rate 1 /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}"
+
+# topic hz
+ros2 topic hz /turtle1/pose
+
+# remap turtle_teleop_key to turtle2
+ros2 run turtlesim turtle_teleop_key --ros-args--remap turtle1/cmd_vel:=turtle2/cmd_vel
+
+# ros2 srvice list
+ros2 service list
+ros2 service type /clear
+ros2 service list -t
+ros2 service find std_srvs/srv/Empty
+ros2 interface show turtlesim/srv/Spawn
+
+ros2 service call /clear std_srvs/srv/Empty
+ros2 service call /reset std_srvs/srv/Empty
+
+ros2 service call /spawn turtlesim/srv/Spawn "{x: 2, y: 3, theta: 0, name: 'turtle3'}"
+
+# ros2 param list
+ros2 param list
+ros2 param get /my_turtle background_r
+ros2 param set /my_turtle background_r 199
+ros2 param dump /my_turtle
+ros2 param load /my_turtle ./my_turtle.yaml
+ros2 run turtlesim turtlesim_node --ros-args --remap __node:=my_turtle --params-file ./my_turtle.yaml
+
+# ros2 action list
+ros2 action list
+ros2 action list -t
+ros2 action info /turtle1/rotate_absolute
+ros2 interface show turtlesim/action/RotateAbsolute
+ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "{theta: 1.57}"
+ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "{theta: -1.57}" --feedback
+
+===============================================================
